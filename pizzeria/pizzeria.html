@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Margherita</title>
+    <link rel="stylesheet" href="styl6.css">
+    <script>
+        function oblicz() {
+            var check = document.getElementById("check");
+            var km = document.getElementById("km").value;
+            var koszt = km * 2;
+            if (check.checked == true) {
+                document.getElementById("wynik").innerHTML = ("Dowieziemy Twoją pizzę za darmo");
+            } else {
+                document.getElementById("wynik").innerHTML = ("Dowóz będzie Cię kosztował "+koszt+" złotych");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="baner">
+        <h2>Najlepsza pizza w mieście</h2>
+        <img src="logo.png" alt="" height="100px">
+    </div>
+    <div class="lewy">
+        <p>U nas zamówisz pizzę z dowozem</p>
+        <a href="logo.png">Nasze logo</a>
+    </div>
+    <div class="srodkowy">
+        <h3>Pizza Margherita</h3>
+        <p>ul. Botaniczna 4, Zielona Góra</p>
+    </div>
+    <div class="prawy">
+        <h3>Oferta</h3>
+        <ol>
+            <li>Pizza</li>
+            <li>Lasagne</li>
+            <li>Sałatki</li>
+        </ol>
+        <a href="oferta.txt">Pobierz pełną ofertę</a>
+    </div>
+    <div class="dolny">
+        <h3>Oblicz koszt dostawy</h3>
+        <input type="checkbox" name="" id="check">
+        <label for="check">Jestem z Zielonej Góry</label> <br>
+        <p>albo</p>
+        <label for="km">Podaj liczbę kilometrów od Zielonej Góry</label>
+        <input type="number" name="" id="km"> <br>
+        <button onclick="oblicz()">Oblicz</button>
+        <p id="wynik"></p>
+    </div>
+    <div class="stopka">
+        Stronę internetową opracował: <b>00000000000</b>
+    </div>
+</body>
+</html>

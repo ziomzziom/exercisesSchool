@@ -1,0 +1,11 @@
+zapytanie 01:
+SELECT `nazwa`,`wystepowanie` FROM `ryby` WHERE `styl_zycia`=1; 
+
+zapytanie 02:
+SELECT `Ryby_id`, `wymiar_ochronny` FROM `okres_ochronny` WHERE `wymiar_ochronny`<50; 
+
+zapytanie 03:
+SELECT `nazwa`, akwen, wojewodztwo FROM `ryby`, lowisko WHERE ryby.id=ryby_id and rodzaj=2; 
+
+zapytanie 04:
+ALTER TABLE ryby ADD COLUMN dobowy_limit int;

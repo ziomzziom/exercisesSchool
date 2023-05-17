@@ -1,0 +1,11 @@
+zapytanie 1:
+INSERT INTO uzytkownicy VALUES(null, 'Anna', 'muzyka', 'informatyk', 'K'); 
+
+zapytanie 2:
+INSERT INTO konta VALUES(null, 'AKowalska', 'qazwsx'); 
+
+zapytanie 3:
+SELECT login, haslo FROM konta; 
+
+zapytanie 4:
+SELECT zainteresowania FROM uzytkownicy WHERE id=1; 

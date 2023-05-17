@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacja Meteo</title>
+    <style>
+        a{
+            color: yellow;
+        }
+        .baner{
+            background-color: #4a7684;
+            color: white;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+        }
+        .stopka{
+            background-color: #4a7684;
+            color: white;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+            clear: both;
+        }
+        .prawy{
+            background-color: #4a7684;
+            color: white;
+            width: 35%;
+            height: 500px;
+            float: right;
+        }
+        .lewy{
+            text-align: center;
+            width: 65%;
+            height: 500px;
+            float: left;
+        }
+        table{
+            border: 1px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="baner">
+        <h1>STACJA METEO</h1>
+    </div>
+    <div class="lewy">
+        <h2>Dokumentacja wyników zapytań w bazie Meteo</h2><br>
+        <table>
+            <tr>
+                <td><img src="kw1.jpg" alt="kwerenda 1" border="1"></td>
+                <td><img src="kw2.jpg" alt="kwerenda 2" border="1"></td>
+            </tr>
+            <tr>
+                <td><img src="kw3.jpg" alt="kwerenda 3" border="1"></td>
+                <td><img src="kw4.jpg" alt="kwerenda 4" border="1"></td>
+            </tr>  
+        </table>
+    </div>
+    <div class="prawy">
+        <h2>zamiana jednostek temperatury</h2><br>
+        temperatura w<sup> o</sup>C: <input type="number" id="te"><br>
+        <button onclick="kelwiny()">Kelwiny</button>
+        <button onclick="inne()">inne</button>
+       <script>
+          function inne()
+          {
+              let x=document.getElementById('te').value;
+              x=parseInt(x);
+             document.getElementById('wynik').innerHTML =  x * 1.8+ 32 ;               		
+          }
+        
+          function kelwiny()
+          {
+            let z=document.getElementById('te').value;
+            z=parseInt(z);
+            document.getElementById('wynik').innerHTML=  z + 273.15;  
+          }
+      </script>
+        <p id='wynik'> </p>
+           
+        <br><h2>Do pobrania</h2><br>
+        <ul>
+            <li><a href="../baza/kwerendy.txt">Kwerendy</a></li>
+            <li><a href="../baza/meteo.sql">Eksport MySQL</a></li>
+        </ul>
+    </div>
+    <div class="stopka"><p>PESEL AUTORA STRONY: 000000000</p></div>
+</body>
+</html>

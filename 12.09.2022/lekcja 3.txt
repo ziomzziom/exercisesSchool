@@ -1,0 +1,472 @@
+
+Setting environment for using XAMPP for Windows.
+KacSzaf49@LCZ-001W1308945 cxampp
+# mysql -u root -p
+Enter password
+Welcome to the MariaDB monitor.  Commands end with ; or g.
+Your MariaDB connection id is 8
+Server version 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or 'h' for help. Type 'c' to clear the current input statement.
+
+MariaDB [(none)] use 4tn_gr2
+MariaDB [4tn_gr2]
+MariaDB [4tn_gr2] show tables
+    - ^QBye
+
+KacSzaf49@LCZ-001W1308945 cxampp
+# mysql -u root -p
+Enter password
+Welcome to the MariaDB monitor.  Commands end with ; or g.
+Your MariaDB connection id is 9
+Server version 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or 'h' for help. Type 'c' to clear the current input statement.
+
+MariaDB [(none)] use 4tn_gr2
+Database changed
+MariaDB [4tn_gr2] show tables;
++-------------------+
+ Tables_in_4tn_gr2 
++-------------------+
+ osoby             
++-------------------+
+1 row in set (0.010 sec)
+
+MariaDB [4tn_gr2]
+MariaDB [4tn_gr2]
+MariaDB [4tn_gr2]
+MariaDB [4tn_gr2] create table filmy(
+    - id int(3) not null auto_increment primary key,
+    - tytul varchar(50) not null,
+    - kraj set('Polska', 'USA', 'Azerbejdżan', 'Indie', 'Niemcy', 'Francja'),
+    - gatunek enum('Komedie', 'Dramat', 'Horror', 'Dokumentalny', 'Przygodowy', 'akcji'),
+    - rezyser varchar(40) not null,
+    - cena float not null,
+    - index (tytul)
+    - );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [4tn_gr2] desc filmy;
++---------+-----------------------------------------------------------------------+------+-----+---------+----------------+
+ Field    Type                                                                   Null  Key  Default  Extra          
++---------+-----------------------------------------------------------------------+------+-----+---------+----------------+
+ id       int(3)                                                                 NO    PRI  NULL     auto_increment 
+ tytul    varchar(50)                                                            NO    MUL  NULL                    
+ kraj     set('Polska','USA','Azerbejdan','Indie','Niemcy','Francja')           YES        NULL                    
+ gatunek  enum('Komedie','Dramat','Horror','Dokumentalny','Przygodowy','akcji')  YES        NULL                    
+ rezyser  varchar(40)                                                            NO         NULL                    
+ cena     float                                                                  NO         NULL                    
++---------+-----------------------------------------------------------------------+------+-----+---------+----------------+
+6 rows in set (0.020 sec)
+
+MariaDB [4tn_gr2] create table wypozyczenia(
+    - id int(5) not null auto_increment primary key,
+    - osoba_id int(5) not null,
+    - film_id int(3) not null,
+    - data_wyp date not null default curdate(),
+    - data_zwrot date,czy_dobry bool,
+    - index(osoba_id),
+    - index(film_id)
+    - );
+Query OK, 0 rows affected (0.023 sec)
+
+MariaDB [4tn_gr2] desc wypozyczenia
+    - Bye
+
+KacSzaf49@LCZ-001W1308945 cxampp
+# mysql -u root -p
+Enter password
+Welcome to the MariaDB monitor.  Commands end with ; or g.
+Your MariaDB connection id is 58
+Server version 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or 'h' for help. Type 'c' to clear the current input statement.
+
+MariaDB [(none)] use 4tn_gr2;
+Database changed
+MariaDB [4tn_gr2] desc wypozyczenia;
++------------+------------+------+-----+-----------+----------------+
+ Field       Type        Null  Key  Default    Extra          
++------------+------------+------+-----+-----------+----------------+
+ id          int(5)      NO    PRI  NULL       auto_increment 
+ osoba_id    int(5)      NO    MUL  NULL                      
+ film_id     int(3)      NO    MUL  NULL                      
+ data_wyp    date        NO         curdate()                 
+ data_zwrot  date        YES        NULL                      
+ czy_dobry   tinyint(1)  YES        NULL                      
++------------+------------+------+-----+-----------+----------------+
+6 rows in set (0.005 sec)
+
+MariaDB [4tn_gr2] insert into filmy values('', 'Potop', 'Polska', 'Przygodowy','Hoffman', '15.00');
+Query OK, 1 row affected, 1 warning (0.010 sec)
+
+MariaDB [4tn_gr2]
+MariaDB [4tn_gr2]
+MariaDB [4tn_gr2] select  from filmy;
++----+-------+--------+------------+---------+------+
+ id  tytul  kraj    gatunek     rezyser  cena 
++----+-------+--------+------------+---------+------+
+  1  Potop  Polska  Przygodowy  Hoffman    15 
++----+-------+--------+------------+---------+------+
+1 row in set (0.008 sec)
+
+MariaDB [4tn_gr2] insert into filmy values(null, 'Stara Baśń', 'Polska','Dramat','Jerzy Hoffman', '12.00');
+Query OK, 1 row affected, 1 warning (0.010 sec)
+
+MariaDB [4tn_gr2] select  from filmy;
++----+------------+--------+------------+---------------+------+
+ id  tytul       kraj    gatunek     rezyser        cena 
++----+------------+--------+------------+---------------+------+
+  1  Potop       Polska  Przygodowy  Hoffman          15 
+  2  Stara Ba  Polska  Dramat      Jerzy Hoffman    12 
++----+------------+--------+------------+---------------+------+
+2 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] insert into filmy values(3, 'Nóż w Wodzie', 'Chiny', 'przygodowy', 'roman polański', '10.00');
+Query OK, 1 row affected, 3 warnings (0.009 sec)
+
+MariaDB [4tn_gr2] select  from filmy;
++----+--------------+--------+------------+----------------+------+
+ id  tytul         kraj    gatunek     rezyser         cena 
++----+--------------+--------+------------+----------------+------+
+  1  Potop         Polska  Przygodowy  Hoffman           15 
+  2  Stara Ba    Polska  Dramat      Jerzy Hoffman     12 
+  3  N w Wodzie          Przygodowy  roman polaski    10 
++----+--------------+--------+------------+----------------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] select  from filmy;
++----+--------------+--------+------------+----------------+------+
+ id  tytul         kraj    gatunek     rezyser         cena 
++----+--------------+--------+------------+----------------+------+
+  1  Potop         Polska  Przygodowy  Hoffman           15 
+  2  Stara Ba    Polska  Dramat      Jerzy Hoffman     12 
+  3  N w Wodzie          Przygodowy  roman polaski    10 
++----+--------------+--------+------------+----------------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] insert into filmy values(null,'przygodowy','','','Roman Polański','12.00');
+Query OK, 1 row affected, 2 warnings (0.009 sec)
+
+MariaDB [4tn_gr2] select  from filmy;
++----+--------------+--------+------------+----------------+------+
+ id  tytul         kraj    gatunek     rezyser         cena 
++----+--------------+--------+------------+----------------+------+
+  1  Potop         Polska  Przygodowy  Hoffman           15 
+  2  Stara Ba    Polska  Dramat      Jerzy Hoffman     12 
+  3  N w Wodzie          Przygodowy  roman polaski    10 
+  4  przygodowy                        Roman Polaski    12 
++----+--------------+--------+------------+----------------+------+
+4 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] delete from filmy where id=4;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [4tn_gr2] select  from filmy;
++----+--------------+--------+------------+----------------+------+
+ id  tytul         kraj    gatunek     rezyser         cena 
++----+--------------+--------+------------+----------------+------+
+  1  Potop         Polska  Przygodowy  Hoffman           15 
+  2  Stara Ba    Polska  Dramat      Jerzy Hoffman     12 
+  3  N w Wodzie          Przygodowy  roman polaski    10 
++----+--------------+--------+------------+----------------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] update filmy set kraj='Polska, USA' where id=3;
+Query OK, 1 row affected, 1 warning (0.009 sec)
+Rows matched 1  Changed 1  Warnings 1
+
+MariaDB [4tn_gr2] select  from filmy;
++----+--------------+--------+------------+----------------+------+
+ id  tytul         kraj    gatunek     rezyser         cena 
++----+--------------+--------+------------+----------------+------+
+  1  Potop         Polska  Przygodowy  Hoffman           15 
+  2  Stara Ba    Polska  Dramat      Jerzy Hoffman     12 
+  3  N w Wodzie  Polska  Przygodowy  roman polaski    10 
++----+--------------+--------+------------+----------------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] update filmy set kraj='Polska,USA' where id=3;
+Query OK, 1 row affected (0.009 sec)
+Rows matched 1  Changed 1  Warnings 0
+
+MariaDB [4tn_gr2] select  from filmy;
++----+--------------+------------+------------+----------------+------+
+ id  tytul         kraj        gatunek     rezyser         cena 
++----+--------------+------------+------------+----------------+------+
+  1  Potop         Polska      Przygodowy  Hoffman           15 
+  2  Stara Ba    Polska      Dramat      Jerzy Hoffman     12 
+  3  N w Wodzie  Polska,USA  Przygodowy  roman polaski    10 
++----+--------------+------------+------------+----------------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] insert into filmy values(null, 'Nie ma mocnych', 'Polska', 'Komedia', 'Sylwester Chęciński', '18');
+Query OK, 1 row affected, 2 warnings (0.002 sec)
+
+MariaDB [4tn_gr2] select  from filmy;
++----+----------------+------------+------------+---------------------+------+
+ id  tytul           kraj        gatunek     rezyser              cena 
++----+----------------+------------+------------+---------------------+------+
+  1  Potop           Polska      Przygodowy  Hoffman                15 
+  2  Stara Ba      Polska      Dramat      Jerzy Hoffman          12 
+  3  N w Wodzie    Polska,USA  Przygodowy  roman polaski         10 
+  5  Nie ma mocnych  Polska                  Sylwester Chciski    18 
++----+----------------+------------+------------+---------------------+------+
+4 rows in set (0.002 sec)
+
+MariaDB [4tn_gr2]
+MariaDB [4tn_gr2] select  from filmy;
++----+----------------+------------+------------+---------------------+------+
+ id  tytul           kraj        gatunek     rezyser              cena 
++----+----------------+------------+------------+---------------------+------+
+  1  Potop           Polska      Przygodowy  Hoffman                15 
+  2  Stara Ba      Polska      Dramat      Jerzy Hoffman          12 
+  3  N w Wodzie    Polska,USA  Przygodowy  roman polaski         10 
+  5  Nie ma mocnych  Polska                  Sylwester Chciski    18 
++----+----------------+------------+------------+---------------------+------+
+4 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] update filmy set id=5 where id=4;
+Query OK, 0 rows affected (0.001 sec)
+Rows matched 0  Changed 0  Warnings 0
+
+MariaDB [4tn_gr2] select  from filmy;
++----+----------------+------------+------------+---------------------+------+
+ id  tytul           kraj        gatunek     rezyser              cena 
++----+----------------+------------+------------+---------------------+------+
+  1  Potop           Polska      Przygodowy  Hoffman                15 
+  2  Stara Ba      Polska      Dramat      Jerzy Hoffman          12 
+  3  N w Wodzie    Polska,USA  Przygodowy  roman polaski         10 
+  5  Nie ma mocnych  Polska                  Sylwester Chciski    18 
++----+----------------+------------+------------+---------------------+------+
+4 rows in set (0.003 sec)
+
+MariaDB [4tn_gr2] update filmy set id=5 where id=4;
+Query OK, 0 rows affected (0.001 sec)
+Rows matched 0  Changed 0  Warnings 0
+
+MariaDB [4tn_gr2] select  from filmy;
++----+----------------+------------+------------+---------------------+------+
+ id  tytul           kraj        gatunek     rezyser              cena 
++----+----------------+------------+------------+---------------------+------+
+  1  Potop           Polska      Przygodowy  Hoffman                15 
+  2  Stara Ba      Polska      Dramat      Jerzy Hoffman          12 
+  3  N w Wodzie    Polska,USA  Przygodowy  roman polaski         10 
+  5  Nie ma mocnych  Polska                  Sylwester Chciski    18 
++----+----------------+------------+------------+---------------------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [4tn_gr2] update filmy set id=4 where id=5;
+Query OK, 1 row affected (0.001 sec)
+Rows matched 1  Changed 1  Warnings 0
+
+MariaDB [4tn_gr2] select  from filmy;
++----+----------------+------------+------------+---------------------+------+
+ id  tytul           kraj        gatunek     rezyser              cena 
++----+----------------+------------+------------+---------------------+------+
+  1  Potop           Polska      Przygodowy  Hoffman                15 
+  2  Stara Ba      Polska      Dramat      Jerzy Hoffman          12 
+  3  N w Wodzie    Polska,USA  Przygodowy  roman polaski         10 
+  4  Nie ma mocnych  Polska                  Sylwester Chciski    18 
++----+----------------+------------+------------+---------------------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [4tn_gr2] update filmy set gatunek='komedia' where id =4;
+Query OK, 0 rows affected, 1 warning (0.001 sec)
+Rows matched 1  Changed 0  Warnings 1
+
+MariaDB [4tn_gr2] select  from filmy;
++----+----------------+------------+------------+---------------------+------+
+ id  tytul           kraj        gatunek     rezyser              cena 
++----+----------------+------------+------------+---------------------+------+
+  1  Potop           Polska      Przygodowy  Hoffman                15 
+  2  Stara Ba      Polska      Dramat      Jerzy Hoffman          12 
+  3  N w Wodzie    Polska,USA  Przygodowy  roman polaski         10 
+  4  Nie ma mocnych  Polska                  Sylwester Chciski    18 
++----+----------------+------------+------------+---------------------+------+
+4 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] update filmy set gatunek='komedia' where id=4;
+Query OK, 0 rows affected, 1 warning (0.000 sec)
+Rows matched 1  Changed 0  Warnings 1
+
+MariaDB [4tn_gr2] select  from filmy;
++----+----------------+------------+------------+---------------------+------+
+ id  tytul           kraj        gatunek     rezyser              cena 
++----+----------------+------------+------------+---------------------+------+
+  1  Potop           Polska      Przygodowy  Hoffman                15 
+  2  Stara Ba      Polska      Dramat      Jerzy Hoffman          12 
+  3  N w Wodzie    Polska,USA  Przygodowy  roman polaski         10 
+  4  Nie ma mocnych  Polska                  Sylwester Chciski    18 
++----+----------------+------------+------------+---------------------+------+
+4 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] update filmy set gatunek='komedia' where id=4;
+Query OK, 0 rows affected, 1 warning (0.000 sec)
+Rows matched 1  Changed 0  Warnings 1
+
+MariaDB [4tn_gr2] desc osoby;
++----------+-------------+------+-----+---------+----------------+
+ Field     Type         Null  Key  Default  Extra          
++----------+-------------+------+-----+---------+----------------+
+ id        int(5)       NO    PRI  NULL     auto_increment 
+ imie      varchar(15)  YES        NULL                    
+ nazwisko  varchar(25)  NO         NULL                    
+ PESEL     char(11)     NO         NULL                    
+ data_ur   date         YES        NULL                    
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.004 sec)
+
+MariaDB [4tn_gr2] alter table osoby add unique(PESEL);
+Query OK, 0 rows affected (0.017 sec)
+Records 0  Duplicates 0  Warnings 0
+
+MariaDB [4tn_gr2] alter table osoby add index(nazwisko);
+Query OK, 0 rows affected (0.010 sec)
+Records 0  Duplicates 0  Warnings 0
+
+MariaDB [4tn_gr2] desc osoby;
++----------+-------------+------+-----+---------+----------------+
+ Field     Type         Null  Key  Default  Extra          
++----------+-------------+------+-----+---------+----------------+
+ id        int(5)       NO    PRI  NULL     auto_increment 
+ imie      varchar(15)  YES        NULL                    
+ nazwisko  varchar(25)  NO    MUL  NULL                    
+ PESEL     char(11)     NO    UNI  NULL                    
+ data_ur   date         YES        NULL                    
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.004 sec)
+
+MariaDB [4tn_gr2] alter table osoby add column miejsce_ur varchar(45) not null default 'Lublin'
+    - Bye
+
+KacSzaf49@LCZ-001W1308945 cxampp
+# mysql -u root -p
+Enter password
+Welcome to the MariaDB monitor.  Commands end with ; or g.
+Your MariaDB connection id is 69
+Server version 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or 'h' for help. Type 'c' to clear the current input statement.
+
+MariaDB [(none)] use 4tn_gr2;
+Database changed
+MariaDB [4tn_gr2] alter table osoby add column miejsce_ur varchar(45) not null default 'Lublin';
+Query OK, 0 rows affected (0.015 sec)
+Records 0  Duplicates 0  Warnings 0
+
+MariaDB [4tn_gr2] insert into osoby values(null, 'Ewa', 'Nowak', '00232306887', '2000-03-23', 'Lublin');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [4tn_gr2] desc osoby;
++------------+-------------+------+-----+---------+----------------+
+ Field       Type         Null  Key  Default  Extra          
++------------+-------------+------+-----+---------+----------------+
+ id          int(5)       NO    PRI  NULL     auto_increment 
+ imie        varchar(15)  YES        NULL                    
+ nazwisko    varchar(25)  NO    MUL  NULL                    
+ PESEL       char(11)     NO    UNI  NULL                    
+ data_ur     date         YES        NULL                    
+ miejsce_ur  varchar(45)  NO         Lublin                  
++------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.011 sec)
+
+MariaDB [4tn_gr2] select  from osoby;
++----+------+----------+-------------+------------+------------+
+ id  imie  nazwisko  PESEL        data_ur     miejsce_ur 
++----+------+----------+-------------+------------+------------+
+  1  Ewa   Nowak     00232306887  2000-03-23  Lublin     
++----+------+----------+-------------+------------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [4tn_gr2] insert into osoby values(null, 'Kornelia', 'Adamiak', '00232306447', '2000-03-23', 'Lublin');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [4tn_gr2] select  from osoby;
++----+----------+----------+-------------+------------+------------+
+ id  imie      nazwisko  PESEL        data_ur     miejsce_ur 
++----+----------+----------+-------------+------------+------------+
+  1  Ewa       Nowak     00232306887  2000-03-23  Lublin     
+  2  Kornelia  Adamiak   00232306447  2000-03-23  Lublin     
++----+----------+----------+-------------+------------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] create temporary table wycieczki(
+    - id int(3) not null auto_increment primary key,
+    - miasto varchar(30) not null,
+    - cena float
+    - );
+Query OK, 0 rows affected (0.096 sec)
+
+MariaDB [4tn_gr2] show tables
+    - Bye
+
+KacSzaf49@LCZ-001W1308945 cxampp
+# mysql -u root -p
+Enter password
+Welcome to the MariaDB monitor.  Commands end with ; or g.
+Your MariaDB connection id is 78
+Server version 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or 'h' for help. Type 'c' to clear the current input statement.
+
+MariaDB [(none)] use 4tn_gr2;
+Database changed
+MariaDB [4tn_gr2] show tables;
++-------------------+
+ Tables_in_4tn_gr2 
++-------------------+
+ filmy             
+ osoby             
+ wypozyczenia      
++-------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [4tn_gr2] insert into wycieczki values(null, 'Warszawa', '320,50');
+ERROR 1146 (42S02) Table '4tn_gr2.wycieczki' doesn't exist
+MariaDB [4tn_gr2] create temporary table wycieczki(
+    - id int(3) not null auto_increment primary key,
+    - miasto varchar(30) not null,
+    - cena float
+    - );
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [4tn_gr2] insert into wycieczki values(null, 'Warszawa', '320.50');
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [4tn_gr2] quit
+Bye
+
+KacSzaf49@LCZ-001W1308945 cxampp
+# mysql -u root -p
+Enter password
+Welcome to the MariaDB monitor.  Commands end with ; or g.
+Your MariaDB connection id is 79
+Server version 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or 'h' for help. Type 'c' to clear the current input statement.
+
+MariaDB [(none)] use 4tn_gr2;
+Database changed
+MariaDB [4tn_gr2] select  from filmy where cena15;
++----+----------------+--------+---------+---------------------+------+
+ id  tytul           kraj    gatunek  rezyser              cena 
++----+----------------+--------+---------+---------------------+------+
+  4  Nie ma mocnych  Polska           Sylwester Chciski    18 
++----+----------------+--------+---------+---------------------+------+
+1 row in set (0.002 sec)
+
+MariaDB [4tn_gr2]
